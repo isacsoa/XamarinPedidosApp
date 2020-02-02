@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using XamarinPedidosApp.Models;
 using XamarinPedidosApp.Services;
+using XPABusiness;
+using XPABusiness.Descontos;
 
 namespace XamarinPedidosApp.ViewModel
 {
@@ -17,7 +19,8 @@ namespace XamarinPedidosApp.ViewModel
         public ObservableCollection<Produto> Produto { get; }
         public ObservableCollection<Promocao> Promocao { get; }
         public ObservableCollection<Categoria> Categoria { get; }
-        //public Command<Personagem> ExibirPersonagemCommand { get; }
+        //public Command<Personagem> ExibirProdutoCommand { get; }
+        public Command<Produto> CalcularDescontoCommand { get; }
 
         private ProdutoApiService _produtoApiService;
         private PromocaoApiService _promocaoApiService;
@@ -76,6 +79,22 @@ namespace XamarinPedidosApp.ViewModel
             finally
             {
                 Ocupado = false;
+            }
+        }
+
+        public decimal CalculaDesconto(int idCategoria, Produto produto, int qtd)
+        {
+            ValorAplicadoBusiness vABusiness = new ValorAplicadoBusiness(produto.price);
+            switch (produto.category_id)
+            {
+                case 2:
+                    return vABusiness.AplicaValor(new Celulares(), qtd);
+                case 3:
+                    return vABusiness.AplicaValor(new LavaRoupas(), qtd);
+                case 5:
+                    return vABusiness.AplicaValor(new CameraFotografica(), qtd);
+                default:
+                    return produto.price;
             }
         }
     }

@@ -37,5 +37,9 @@ namespace XamarinPedidosApp
             //}
         }
 
+        private void stepper_ValueChanged(object sender, SelectedItemChangedEventArgs e)
+        {
+            var stpp = this.FindByName<Stepper>("Stepper");
+        }
     }
 }

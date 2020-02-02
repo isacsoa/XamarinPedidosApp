@@ -22,6 +22,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -59,17 +60,37 @@
                             TextColor="Black"
                             FontSize="Body"/>
 
-                        <Stepper 
+                        <Label 
                             Grid.Row="3"
+                            Grid.Column="1"
+                            HorizontalOptions="Center" 
+                            x:Name="categoryLabel"
+                            Text="{Binding category_id}"
+                            IsVisible="False"
+                            FontSize="14"
+                            TextColor="Black" />
+                        <Label 
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            HorizontalOptions="Center" 
+                            x:Name="stepperLabel"
+                            Text="{Binding Source={x:Reference Stepper}, Path=Value}"
+                            FontSize="14"
+                            TextColor="Black" />
+
+                        <Stepper 
+                            x:Name="Stepper"
+                            Grid.Row="4"
                             Grid.Column="1"
                             Grid.RowSpan="2"
                             Grid.ColumnSpan="3"
-                            
+                            ValueChanged="stepper_ValueChanged"
                             Minimum="0"
-                            Maximum="20"
+                            Maximum="20" 
+                            HorizontalOptions="LayoutOptions.Center" 
+                            VerticalOptions="LayoutOptions.CenterAndExpand"
                             Increment="1.0"
-                            HorizontalOptions="End"
-                            VerticalOptions="Start" />
+                            />
 
 
                     </Grid>
