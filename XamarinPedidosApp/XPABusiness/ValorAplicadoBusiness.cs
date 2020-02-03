@@ -11,10 +11,10 @@ namespace XPABusiness
         {
             this.valor = valor;
         }
-
+        //Calcula desconto e retorna o valor cheio com base na quantidade
         public decimal AplicaValor(IDesconto desconto, int quantidade )
         {
-            return desconto.Calcula(this, quantidade);
+            return desconto.Calcula(this, quantidade) * quantidade;
         }
     }
 }
